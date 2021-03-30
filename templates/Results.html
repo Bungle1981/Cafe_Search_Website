@@ -1,0 +1,74 @@
+{% extends "LayoutFile.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+<nav id="nav">
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home Page</a></li>
+        <li><a href="{{ url_for('SearchCafe') }}" class="active">Search Cafes</a></li>
+        <li><a href="{{ url_for('addCafe') }}">Add Cafe</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block sectionheader %}Your search results{% endblock %}
+
+{% block sectioncontent %}
+    {% if cafes %}
+        <table class="table">
+            <thead>
+                <td>Cafe Name</td>
+                <td>Map</td>
+                <td>Photo</td>
+                <td>Location</td>
+                <td>Power?</td>
+                <td>Toilets?</td>
+                <td>WiFi?</td>
+                <td>Calls?</td>
+                <td>Seats</td>
+                <td>Coffee Price</td>
+            </thead>
+            {% for cafe in cafes: %}
+            <tr>
+                <td>{{ cafe.name }}</td>  <!--Name-->
+                <td><a href="{{ cafe.map_url }}">Link</a></td> <!--MapURL-->
+                <td><a href="{{ cafe.img_url }}">Link</a></td> <!--ImgURL-->
+                <td>{{ cafe.location }}</td> <!--Location-->
+                <td> <!--Sockets-->
+                    {% if cafe.has_sockets == 1: %} <!--Toilet-->
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td>
+                    {% if cafe.has_toilet == 1: %} <!--Toilet-->
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td>
+                    {% if cafe.has_wifi == 1: %} <!--Wifi-->
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td>
+                    {% if cafe.can_take_calls == 1: %} <!--Can take calls-->
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td>{{ cafe.seats }}</td> <!--seats-->
+                <td>{{ cafe.coffee_price }}</td> <!--coffeeprice-->
+                <td><a href="{{ url_for('DeleteCafe', id=cafe.id) }}">Delete</a></td> <!--coffeeprice-->
+            </tr>
+            {% endfor %}
+          </table>
+        {% else %}
+            <p>Sorry, I couldn't find any cafes in that location. If you want to view all cafes click <a href="{{ url_for('showAll') }}">here</a></p>
+        {% endif %}
+{% endblock %}

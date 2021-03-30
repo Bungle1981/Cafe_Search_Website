@@ -1,0 +1,21 @@
+{% extends "LayoutFile.html" %}
+
+{% block navbar %}
+<nav id="nav">
+    <ul>
+        <li><a href="{{ url_for('home') }}" class="active">Home Page</a></li>
+        <li><a href="{{ url_for('SearchCafe') }}">Search Cafes</a></li>
+        <li><a href="{{ url_for('addCafe') }}">Add Cafe</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block sectionheader %}Welcome to the site!{% endblock %}
+
+
+{% block sectioncontent %}
+<p>This site allows you to search for cafes and view how other users have rated each cafe, based on a number of factors, such as the wi-fi and availability of power points.</p>
+<p>If you find a cafe that isn't listed. You can add a cafe <a href="{{ url_for('addCafe') }}">here</a></p>
+<p>To view all cafes, click <a href="{{ url_for('showAll') }}">here</a></p>
+
+{% endblock %}

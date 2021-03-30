@@ -1,0 +1,20 @@
+{% extends "LayoutFile.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbar %}
+<nav id="nav">
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home Page</a></li>
+        <li><a href="{{ url_for('SearchCafe') }}" class="active">Search Cafes</a></li>
+        <li><a href="{{ url_for('addCafe') }}">Add Cafe</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block sectionheader %}Search for a cafe near you{% endblock %}
+
+{% block sectioncontent %}
+<form method="POST" action="{{ url_for('SearchCafe') }}" novalidate>
+    {{ wtf.quick_form(form, novalidate=True) }}
+</form>
+{% endblock %}
